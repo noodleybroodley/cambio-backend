@@ -2,11 +2,15 @@ const express = require('express');
 const app = express();
 const SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
+const cors = require('cors');
+app.use(cors({
+    origin: 'https://cambio.onrender.com/'
+}));
 
 let spotifyApi = new SpotifyWebApi({
     clientId: `${process.env.REACT_APP_ID}`,
     clientSecret: `${process.env.REACT_APP_SECRET}`,
-    redirectUri: "http://localhost:3000/"
+    redirectUri: "https://cambio.onrender.com/"
 });
 
 app.get("/api/login", (req, res) => {
