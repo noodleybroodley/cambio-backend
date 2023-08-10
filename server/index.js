@@ -4,7 +4,7 @@ const SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
 const cors = require('cors');
 app.use(cors({
-    origin: 'https://cambio.onrender.com/'
+    origin: 'https://cambio.onrender.com'
 }));
 
 let spotifyApi = new SpotifyWebApi({
