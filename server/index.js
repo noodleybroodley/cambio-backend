@@ -2,15 +2,11 @@ const express = require('express');
 const app = express();
 const SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
-const cors = require('cors');
-app.use(cors({
-    origin: 'https://cambio.onrender.com'
-}));
 
 let spotifyApi = new SpotifyWebApi({
     clientId: `${process.env.REACT_APP_ID}`,
     clientSecret: `${process.env.REACT_APP_SECRET}`,
-    redirectUri: "https://cambio.onrender.com/"
+    redirectUri: "http://localhost:3000/"
 });
 
 app.get("/api/login", (req, res) => {
@@ -114,10 +110,11 @@ async function getSongs(id, offset) {
 }
 app.get("/api/getPlaylist/:id", async (req, res) => {
     /** Backend endpoint for getting all songs in a playlist*/
-    var songs = await getAllSongs(req.params.id);
-    var playlist = await spotifyApi.getPlaylist(req.params.id);
-    console.log("playlist: ",playlist)
-    res.send([songs,playlist]);
+    var songs = await getAllSongs(req.params.id).catch(err => err);
+    console.log("songs: ", songs);
+    var playlist = await spotifyApi.getPlaylist(req.params.id).catch(err => err);
+    res.send([songs, playlist]);
+
 })
 
 //Apple Music
