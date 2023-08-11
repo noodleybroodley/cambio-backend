@@ -5,13 +5,13 @@ require('dotenv').config();
 
 const cors = require('cors');
 app.use(cors({
-    origin: process.env.BACKEND_ROUTE
+    origin: 'https://cambio.onrender.com'
 }));
 
 let spotifyApi = new SpotifyWebApi({
     clientId: `${process.env.REACT_APP_ID}`,
     clientSecret: `${process.env.REACT_APP_SECRET}`,
-    redirectUri: process.env.BACKEND_ROUTE + "/"
+    redirectUri: "https://cambio.onrender.com/"
 });
 
 app.get("/api/login", (req, res) => {
